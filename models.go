@@ -1,8 +1,16 @@
 package trimps
 
 type Player struct {
-	Save Save
+	Save           Save
+	PendingMessage []string
 }
+
+type BuildingQueItem struct {
+	ID       BuildingName
+	TimeLeft float64
+}
+
+type BuildingQue []BuildingQueItem
 
 type Save struct {
 	Player       *Player                    `json:"-"`
@@ -12,6 +20,8 @@ type Save struct {
 	Jobs         map[JobName]*Job           `json:"jobs"`
 	Trimps       TrimpsData                 `json:"trimps"`
 	Stats        Stats                      `json:"stats"`
+	Flag         Flag                       `json:"flag"`
+	BuildingQue  BuildingQue                `json:"buildingQue"`
 }
 
 type Stats struct {
@@ -37,6 +47,7 @@ type Building struct {
 	Cost            map[ResourceName]Cost       `json:"-"`
 	BuildTime       float64                     `json:"-"`
 	Name            string                      `json:"-"`
+	ID              BuildingName                `json:"-"`
 	DescriptionFunc func(player *Player) string `json:"-"`
 }
 
@@ -52,12 +63,4 @@ type Job struct {
 	Cost            map[ResourceName]Cost       `json:"-"`
 	Name            string                      `json:"-"`
 	DescriptionFunc func(player *Player) string `json:"-"`
-}
-
-type Flags struct {
-	Food     bool `json:"food"`
-	Wood     bool `json:"wood"`
-	Trap     bool `json:"trap"`
-	Jobs     bool `json:"jobs"`
-	Research bool `json:"research"`
 }

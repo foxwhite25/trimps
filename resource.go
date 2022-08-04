@@ -26,8 +26,12 @@ func (r *Resource) Add(count float64) (ok bool) {
 	}
 }
 
+// Tick the resource by 100ms
 func (r *Resource) Tick() {
-	r.Add(r.RateFunc(r.Player))
+	if r.Locked {
+		return
+	}
+	r.Add(r.RateFunc(r.Player) / 10)
 }
 
 func (r *Resource) with(name string, max func(player *Player) float64, rate func(player *Player) float64) *Resource {
