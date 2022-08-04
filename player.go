@@ -1,4 +1,4 @@
-package trimpsGame
+package trimps
 
 import (
 	"encoding/json"
@@ -28,5 +28,8 @@ func getDefaultSave(player *Player) Save {
 		PlayerAction: None,
 		Resources:    getDefaultResources(player),
 		Buildings:    getDefaultBuildings(player),
+		Jobs:         getDefaultJobs(player),
+		Trimps:       getDefaultTrimps(player),
+		Stats:        Stats{TotalJob: 0},
 	}
 }

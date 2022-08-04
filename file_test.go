@@ -1,4 +1,4 @@
-package trimpsGame
+package trimps
 
 import (
 	"os"

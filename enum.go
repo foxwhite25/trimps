@@ -1,4 +1,4 @@
-package trimpsGame
+package trimps
 
 type Action int64
 
@@ -24,4 +24,12 @@ type BuildingName int64
 
 const (
 	Trap BuildingName = iota
+)
+
+type JobName int64
+
+const (
+	Farmer = iota
+	Lumberjack
+	Miner
 )

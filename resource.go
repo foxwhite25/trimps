@@ -1,4 +1,4 @@
-package trimpsGame
+package trimps
 
 func (r *Resource) Reduce(count float64) (ok bool) {
 	if count < 0 {
@@ -37,13 +37,13 @@ func (r *Resource) with(name string, max func(player *Player) float64, rate func
 	return r
 }
 
-func getDefaultResources(player *Player) map[ResourceName]Resource {
-	return map[ResourceName]Resource{
+func getDefaultResources(player *Player) map[ResourceName]*Resource {
+	return map[ResourceName]*Resource{
 		Food: {
 			Player: player,
 			Name:   "食物",
 			MaxFunc: func(player *Player) float64 {
-				return 100
+				return 500
 			},
 			RateFunc: func(player *Player) float64 {
 				if player.Save.PlayerAction == Farming {
@@ -56,8 +56,9 @@ func getDefaultResources(player *Player) map[ResourceName]Resource {
 		Wood: {
 			Player: player,
 			Name:   "木头",
+			Locked: true,
 			MaxFunc: func(player *Player) float64 {
-				return 100
+				return 500
 			},
 			RateFunc: func(player *Player) float64 {
 				if player.Save.PlayerAction == Lumbering {
@@ -70,8 +71,9 @@ func getDefaultResources(player *Player) map[ResourceName]Resource {
 		Metal: {
 			Player: player,
 			Name:   "钢铁",
+			Locked: true,
 			MaxFunc: func(player *Player) float64 {
-				return 100
+				return 500
 			},
 			RateFunc: func(player *Player) float64 {
 				if player.Save.PlayerAction == Mining {
@@ -84,6 +86,7 @@ func getDefaultResources(player *Player) map[ResourceName]Resource {
 		Science: {
 			Player: player,
 			Name:   "科研",
+			Locked: true,
 			MaxFunc: func(player *Player) float64 {
 				return -1
 			},
