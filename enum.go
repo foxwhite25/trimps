@@ -34,7 +34,7 @@ const (
 	Miner
 )
 
-type Flag uint8
+type Flag uint64
 
 const (
 	FoodFlag Flag = 1 << iota

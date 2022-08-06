@@ -3,6 +3,7 @@ package trimps
 import (
 	"encoding/json"
 	"io"
+	"time"
 )
 
 // LoadPlayer read json file from path to load saves
@@ -16,6 +17,11 @@ func LoadPlayer(r io.Reader) (player *Player, err error) {
 		player.PendingMessage = append(player.PendingMessage, "一团绿光闪过后，你落到了地面上。你看起来饿极了……\n使用 /玩家动作 采集 来搞点东西吃。使用 /资源 查看你当前的资源。")
 		player.Save.Flag.Set(FoodFlag)
 	}
+	if !player.Save.LastSave.IsZero() {
+		diff := time.Now().Sub(player.Save.LastSave).Seconds()
+		player.Tick(int(diff))
+	}
+	player.Save.LastSave = time.Now()
 	return
 }
 

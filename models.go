@@ -1,5 +1,7 @@
 package trimps
 
+import "time"
+
 type Player struct {
 	Save           Save
 	PendingMessage []string
@@ -14,6 +16,7 @@ type BuildingQue []BuildingQueItem
 
 type Save struct {
 	Player       *Player                    `json:"-"`
+	LastSave     time.Time                  `json:"lastSave"`
 	PlayerAction Action                     `json:"playerAction"`
 	Resources    map[ResourceName]*Resource `json:"resources"`
 	Buildings    map[BuildingName]*Building `json:"buildings"`
